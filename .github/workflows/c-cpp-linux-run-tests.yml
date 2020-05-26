@@ -1,0 +1,35 @@
+name: C/C++ CI Run Linux Tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    name: build-linux-no-test
+    steps:
+      - uses: actions/checkout@v2
+      - name: Hello World
+        run: echo "Hello World"
+      - name: Install abysl and protobuf-compiler for python
+        run: |
+          python --version
+          python -m pip install --upgrade pip
+          # pip install absl-py
+          # pip install protobuf-compiler
+          pip install absl-py
+          sudo apt-get install python-protobuf
+      - name: Install protobuf native compiler
+        run: sudo apt-get install protobuf-compiler
+      - name: Build and Run linux
+        run: |
+           set -e
+           set -x
+           mkdir -p linux_build
+           cd linux_build
+           cmake .. -DFIREBASE_CPP_BUILD_TESTS=ON -DFIREBASE_FORCE_FAKE_SECURE_STORAGE=ON "$@"
+           cpus=$(nproc --all)
+           cmake --build . -- -j $cpus
