@@ -14,11 +14,13 @@ jobs:
       - uses: actions/checkout@v2
       - name: Hello World
         run: echo "Hello World"
-      - name: Install abysl for Python
-        run: |
-          python -m pip install --upgrade pip
-          pip install absl-py
-      - name: Install protobuf compiler
+      - name: Update pip
+        run: python -m pip install --upgrade pip
+      - name: Install abysl for python
+        run: pip install absl-py
+      - name: Install protobuf compiler for python
+        run: pip install python-protobuf
+      - name: Install protobuf native compiler
         run: sudo apt-get install protobuf-compiler
       - name: Build linux
         run: |
