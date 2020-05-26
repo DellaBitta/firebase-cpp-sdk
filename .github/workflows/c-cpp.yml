@@ -19,7 +19,7 @@ jobs:
       - name: Install abysl for python
         run: pip install absl-py
       - name: Install protobuf compiler for python
-        run: pip install python-protobuf
+        run: pip install protobuf-compiler
       - name: Install protobuf native compiler
         run: sudo apt-get install protobuf-compiler
       - name: Build linux
