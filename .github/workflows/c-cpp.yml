@@ -20,7 +20,7 @@ jobs:
           python -m pip install --upgrade pip
           # pip install absl-py
           # pip install protobuf-compiler
-          sudo apt-get install python-absl-py
+          pip install absl-py
           sudo apt-get install python-protobuf
       - name: Install protobuf native compiler
         run: sudo apt-get install protobuf-compiler
