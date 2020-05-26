@@ -1,0 +1,24 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    name: build-linux-no-test
+    steps:
+      - uses: actions/checkout@v2
+      - name: Hello World
+        run: echo "Hello World"
+      - name: Build linux
+        run: set -e
+             set -x
+             mkdir -p linux_build
+             cd linux_build
+             cmake .. -DFIREBASE_CPP_BUILD_TESTS=OFF -DFIREBASE_FORCE_FAKE_SECURE_STORAGE=ON "$@"
+             cpus=$(nproc --all)
+             cmake --build . -- -j $cpus
