@@ -17,12 +17,11 @@ jobs:
       - name: Install abysl and protobuf-compiler for python
         run: |
           python --version
-          # python -m pip install --upgrade pip
+          python -m pip install --upgrade pip
           # pip install absl-py
           # pip install protobuf-compiler
-          python -m ensurepip --default-pip
-          python -m pip install --user absl-py
-          python -m pip install --user protobuf
+          apt-get install python-absl-py
+          apt-get install python-protobuf
       - name: Install protobuf native compiler
         run: sudo apt-get install protobuf-compiler
       - name: Build linux
